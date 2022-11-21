@@ -84,7 +84,7 @@ CREATE TABLE `Order_Details` (
 
 CREATE TABLE `Code` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `code` string,
+  `code` varchar(255),
   `discount` float
 );
 
