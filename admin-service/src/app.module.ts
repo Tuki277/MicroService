@@ -7,8 +7,12 @@ import { Category } from './module/category/category.entity';
 import { CategoryModule } from './module/category/category.module';
 import { Code } from './module/code/code.entity';
 import { CodeModule } from './module/code/code.module';
+import { Product } from './module/product/product.entity';
+import { ProductModule } from './module/product/product.module';
 import { Role } from './module/role/role.entity';
 import { RoleModule } from './module/role/role.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { GalleryModule } from './module/gallery/gallery.module';
 
 @Module({
   imports: [
@@ -19,12 +23,15 @@ import { RoleModule } from './module/role/role.module';
       username: env.USERNAME,
       password: env.PASSWORD,
       database: env.DATABASE,
-      entities: [Code, Role, Category],
+      entities: [Code, Role, Category, Product],
       synchronize: true,
     }),
+    MulterModule.register({ dest: './uploads' }),
     CodeModule,
     RoleModule,
     CategoryModule,
+    ProductModule,
+    GalleryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
