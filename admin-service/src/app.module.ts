@@ -13,9 +13,15 @@ import { Role } from './module/role/role.entity';
 import { RoleModule } from './module/role/role.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { GalleryModule } from './module/gallery/gallery.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { Gallery } from './module/gallery/gallery.entity';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '../uploads'),
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: env.HOST,
@@ -23,10 +29,10 @@ import { GalleryModule } from './module/gallery/gallery.module';
       username: env.USERNAME,
       password: env.PASSWORD,
       database: env.DATABASE,
-      entities: [Code, Role, Category, Product],
+      entities: [Code, Role, Category, Product, Gallery],
       synchronize: true,
     }),
-    MulterModule.register({ dest: './uploads' }),
+    MulterModule.register({ dest: process.env.LOCATION_UPLOAD_FILE }),
     CodeModule,
     RoleModule,
     CategoryModule,

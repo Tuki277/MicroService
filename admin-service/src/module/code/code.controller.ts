@@ -41,7 +41,7 @@ export class CodeController extends BaseResponse {
   async updateCodeController(@Req() req: Request, @Res() res: Response) {
     const id: number = parseInt(req.params.id);
     await this.codeService.updateCode(id, req.body);
-    return this.jsonResponse(res, 204);
+    return this.jsonResponse(res, HttpStatus.NO_CONTENT);
   }
 
   @Delete(':id')
