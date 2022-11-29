@@ -1,9 +1,16 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { env } from 'process';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { GetAccessTokenMiddleware } from './middlewares/getAccessToken.middleware';
 import { AuthModule } from './module/auth/auth.module';
+import { Tokens } from './module/user/tokens.entity';
 import { User } from './module/user/user.entity';
 import { UserModule } from './module/user/user.module';
 
@@ -16,7 +23,7 @@ import { UserModule } from './module/user/user.module';
       username: env.USERNAME,
       password: env.PASSWORD,
       database: env.DATABASE,
-      entities: [User],
+      entities: [User, Tokens],
       synchronize: true,
     }),
     UserModule,
@@ -25,4 +32,10 @@ import { UserModule } from './module/user/user.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(GetAccessTokenMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}

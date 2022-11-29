@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { BaseResponse } from 'src/common/base/base.response';
 import { hashPassword } from 'src/common/helper/hashPassword';
+import { Tokens } from './tokens.entity';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 
@@ -71,6 +72,22 @@ export class UserService extends BaseResponse {
       } else {
         this.errorResponse('Not Found');
       }
+    } catch (error) {
+      this.errorResponse(error.message);
+    }
+  }
+
+  async createToken(input: Partial<Tokens>) {
+    try {
+      return await this.userRepository.createToken(input);
+    } catch (error) {
+      this.errorResponse(error.message);
+    }
+  }
+
+  async findToken(id: number): Promise<Tokens[]> {
+    try {
+      return await this.userRepository.findToken(id);
     } catch (error) {
       this.errorResponse(error.message);
     }

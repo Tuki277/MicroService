@@ -15,4 +15,18 @@ export class AuthController extends BaseResponse {
     await this.authService.registerAccountService(body);
     return this.jsonResponse(res, HttpStatus.CREATED);
   }
+
+  @Post('login')
+  async loginAccount(@Req() req: Request, @Res() res: Response) {
+    const login = await this.authService.validatePassword(
+      req.body.password,
+      req.body,
+    );
+    const data = {
+      accessToken: login,
+      message: 'LoginSuccess',
+      statusCode: 200,
+    };
+    return this.jsonResponse(res, HttpStatus.OK, data);
+  }
 }

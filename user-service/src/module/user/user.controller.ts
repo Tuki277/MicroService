@@ -7,7 +7,9 @@ import {
   Put,
   Req,
   Res,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { Request, Response } from 'express';
 import { BaseResponse } from 'src/common/base/base.response';
 import { User } from './user.entity';
@@ -18,6 +20,8 @@ export class UserController extends BaseResponse {
   constructor(private userService: UserService) {
     super();
   }
+
+  @UseGuards(AuthGuard('auth'))
   @Get()
   async getAllProductController(@Req() req: Request, @Res() res: Response) {
     const data: User[] = await this.userService.getAllUser();
