@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { BaseResponse } from 'src/common/base/base.response';
+import { IPagging } from 'src/common/interface';
 import { Category } from './category.entity';
 import { CategoryRepository } from './category.repository';
 
@@ -9,9 +10,9 @@ export class CategoryService extends BaseResponse {
     super();
   }
 
-  async getAllCategory() {
+  async getAllCategory(req?: IPagging) {
     try {
-      return await this.categoryRepository.get();
+      return await this.categoryRepository.get(req);
     } catch (error) {
       this.errorResponse(error.message);
     }

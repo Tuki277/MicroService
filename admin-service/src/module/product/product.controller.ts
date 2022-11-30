@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { BaseResponse } from 'src/common/base/base.response';
+import { Like } from 'typeorm';
 import { Product } from './product.entity';
 import { ProductService } from './product.service';
 
@@ -20,7 +21,10 @@ export class ProductController extends BaseResponse {
   }
   @Get()
   async getAllProductController(@Req() req: Request, @Res() res: Response) {
-    const data: Product[] = await this.productService.getAllProduct();
+    const data: Product[] = await this.productService.getAllProduct({
+      page: (req.query as any).page,
+      rowperpage: (req.query as any).rowperpage,
+    });
     return this.jsonResponse(res, HttpStatus.OK, data);
   }
 
@@ -30,10 +34,19 @@ export class ProductController extends BaseResponse {
     return this.jsonResponse(res, HttpStatus.CREATED);
   }
 
+  @Post('filter')
+  async filterProduct(@Req() req: Request, @Res() res: Response) {
+    const dataFilter = {
+      title: Like(`${req.body.title}%`),
+    };
+    const data = await this.productService.findProduct(dataFilter);
+    return this.jsonResponse(res, HttpStatus.OK, data);
+  }
+
   @Get(':id')
   async getProductById(@Req() req: Request, @Res() res: Response) {
     const id = parseInt(req.params.id);
-    const data = await this.productService.findProduct(id);
+    const data = await this.productService.findProduct({ id });
     return this.jsonResponse(res, HttpStatus.OK, data);
   }
 

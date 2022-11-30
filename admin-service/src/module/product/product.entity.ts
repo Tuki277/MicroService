@@ -17,7 +17,7 @@ export class Product {
   title: string;
 
   @Column({ default: 0 })
-  price: number;
+  price: string;
 
   @Column({ default: 0 })
   discount: number;
@@ -31,8 +31,8 @@ export class Product {
   @Column({ default: 0 })
   deleted: number; // 0: deleted, 1: active
 
-  @ManyToOne(() => Category, { nullable: false })
-  category_id: number;
+  @ManyToOne((type) => Category, (category) => category.id, { nullable: false })
+  category: number;
 
   @CreateDateColumn({
     type: 'timestamp',

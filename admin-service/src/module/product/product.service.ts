@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { BaseResponse } from 'src/common/base/base.response';
+import { IPagging } from 'src/common/interface';
 import { Product } from './product.entity';
 import { ProductRepository } from './product.repository';
 
@@ -9,9 +10,9 @@ export class ProductService extends BaseResponse {
     super();
   }
 
-  async getAllProduct() {
+  async getAllProduct(req: IPagging) {
     try {
-      return await this.productRepository.get();
+      return await this.productRepository.get(req);
     } catch (error) {
       this.errorResponse(error.message);
     }
@@ -25,9 +26,9 @@ export class ProductService extends BaseResponse {
     }
   }
 
-  async findProduct(id: number) {
+  async findProduct(req) {
     try {
-      return await this.productRepository.find({ id });
+      return await this.productRepository.find(req);
     } catch (error) {
       this.errorResponse(error.message);
     }
