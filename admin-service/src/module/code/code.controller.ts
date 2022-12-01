@@ -20,7 +20,10 @@ export class CodeController extends BaseResponse {
   }
   @Get()
   async getAllCodeController(@Req() req: Request, @Res() res: Response) {
-    const data: Code[] = await this.codeService.getAllCode();
+    const data: Code[] = await this.codeService.getAllCode({
+      page: (req.query as any).page,
+      rowperpage: (req.query as any).rowperpage,
+    });
     return this.jsonResponse(res, HttpStatus.OK, data);
   }
 

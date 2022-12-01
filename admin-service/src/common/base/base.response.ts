@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  MethodNotAllowedException,
+  NotFoundException,
+} from '@nestjs/common';
 import { Response as ResponseExpress } from 'express';
 
 export class BaseResponse {
@@ -8,22 +13,29 @@ export class BaseResponse {
     data?: T,
   ) => {
     if (statusCode == HttpStatus.OK) {
-      res.status(HttpStatus.OK).send(data);
+      res.status(HttpStatus.OK).send({
+        statusCode: HttpStatus.OK,
+        data,
+        message: 'Success',
+      });
     } else if (
       statusCode == HttpStatus.CREATED ||
       HttpStatus.NO_CONTENT ||
       HttpStatus.FORBIDDEN ||
       HttpStatus.UNAUTHORIZED
     ) {
-      res.status(statusCode).send();
+      res.status(statusCode).send({
+        statusCode: statusCode,
+        message: 'Success',
+      });
     } else {
-      res.status(HttpStatus.METHOD_NOT_ALLOWED).send('Error status code');
+      throw new MethodNotAllowedException();
     }
   };
 
   errorResponse = (error: any, statusCode: HttpStatus = 400) => {
     if (error === 'Not Found') {
-      throw new HttpException(error, HttpStatus.NOT_FOUND);
+      throw new NotFoundException();
     }
     throw new HttpException(error, statusCode);
   };

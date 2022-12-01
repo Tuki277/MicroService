@@ -31,6 +31,9 @@ export class Product {
   @Column({ default: 0 })
   deleted: number; // 0: deleted, 1: active
 
+  @Column({ default: 0 })
+  quantity: number;
+
   @ManyToOne((type) => Category, (category) => category.id, { nullable: false })
   category: number;
 

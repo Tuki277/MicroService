@@ -32,6 +32,10 @@ export class FakeController extends BaseResponse {
         }),
         thumbnail: faker.image.fashion(),
         description: faker.commerce.productDescription(),
+        quantity: faker.datatype.number({
+          min: 5,
+          max: 100,
+        }),
       };
       this.productService.createProduct(data);
     }

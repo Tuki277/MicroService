@@ -12,7 +12,7 @@ export class CategoryRepository {
   ) {}
 
   async get(req?: IPagging): Promise<Category[]> {
-    if (req) {
+    if (req.page != undefined && req.rowperpage != undefined) {
       const skip: number =
         (parseInt(req.page.toString()) - 1) *
         parseInt(req.rowperpage.toString());

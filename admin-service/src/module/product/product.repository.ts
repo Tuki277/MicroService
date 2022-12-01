@@ -18,13 +18,20 @@ export class ProductRepository {
   ) {}
 
   async get(req: IPagging): Promise<Product[]> {
-    const skip: number =
-      (parseInt(req.page.toString()) - 1) * parseInt(req.rowperpage.toString());
-    return await this.productEntity.find({
-      relations: ['category'],
-      take: req.rowperpage,
-      skip,
-    });
+    if (req.page != undefined && req.rowperpage != undefined) {
+      const skip: number =
+        (parseInt(req.page.toString()) - 1) *
+        parseInt(req.rowperpage.toString());
+      return await this.productEntity.find({
+        relations: ['category'],
+        take: req.rowperpage,
+        skip,
+      });
+    } else {
+      return await this.productEntity.find({
+        relations: ['category'],
+      });
+    }
   }
 
   async post(input: Partial<Product>): Promise<Product> {
