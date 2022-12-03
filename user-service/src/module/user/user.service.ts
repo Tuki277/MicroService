@@ -1,4 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
+import { map } from 'rxjs';
 import { BaseResponse } from 'src/common/base/base.response';
 import { hashPassword } from 'src/common/helper/hashPassword';
 import { Tokens } from './tokens.entity';
@@ -7,7 +9,10 @@ import { UserRepository } from './user.repository';
 
 @Injectable()
 export class UserService extends BaseResponse {
-  constructor(private userRepository: UserRepository) {
+  constructor(
+    private userRepository: UserRepository,
+    @Inject('TEST_QUEUE') private client: ClientProxy,
+  ) {
     super();
   }
 

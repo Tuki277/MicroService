@@ -1,11 +1,23 @@
-import { Controller, HttpStatus, Post, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpStatus,
+  Inject,
+  Post,
+  Req,
+  Res,
+} from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { Request, Response } from 'express';
 import { BaseResponse } from 'src/common/base/base.response';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController extends BaseResponse {
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    @Inject('TEST_QUEUE') private client: ClientProxy,
+  ) {
     super();
   }
 
@@ -28,5 +40,16 @@ export class AuthController extends BaseResponse {
       statusCode: 200,
     };
     return this.jsonResponse(res, HttpStatus.OK, data);
+  }
+
+  @Get()
+  async postTestQueue() {
+    console.log('ping');
+    return this.client.send(
+      {
+        cmd: 'find-code',
+      },
+      {},
+    );
   }
 }

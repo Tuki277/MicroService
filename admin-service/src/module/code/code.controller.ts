@@ -8,6 +8,7 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
+import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
 import { Request, Response } from 'express';
 import { BaseResponse } from 'src/common/base/base.response';
 import { Code } from './code.entity';
@@ -52,5 +53,11 @@ export class CodeController extends BaseResponse {
     const id: number = parseInt(req.params.id);
     await this.codeService.deleteCode(id);
     return this.jsonResponse(res, HttpStatus.NO_CONTENT);
+  }
+
+  @MessagePattern({ cmd: 'find-code' })
+  async findRole() {
+    console.log('pong');
+    return 'hello my find-code';
   }
 }

@@ -8,6 +8,7 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 import { Request, Response } from 'express';
 import { BaseResponse } from 'src/common/base/base.response';
 import { Role } from './role.entity';
@@ -49,5 +50,12 @@ export class RoleController extends BaseResponse {
     const id: number = parseInt(req.params.id);
     await this.roleService.deleteRole(id);
     return this.jsonResponse(res, HttpStatus.NO_CONTENT);
+  }
+
+  @MessagePattern({ cmd: 'find-role' })
+  async findRole(@Payload() payload: number) {
+    console.log('pong');
+    const id = payload;
+    return await this.roleService.findRole(id);
   }
 }

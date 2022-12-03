@@ -1,20 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Tokens } from './tokens.entity';
-import { UserController } from './user.controller';
-import { User } from './user.entity';
-import { UserRepository } from './user.repository';
-import { UserService } from './user.service';
+import { FeedbackController } from './feedback.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Tokens])],
-  controllers: [UserController],
+  imports: [],
+  controllers: [FeedbackController],
   providers: [
-    UserRepository,
-    UserService,
     {
-      provide: 'TEST_QUEUE',
+      provide: 'TEST_SERVICE',
       useFactory: () => {
         const host = process.env.RABBITMQ_HOST;
         const user = process.env.RABBITMQ_USER;
@@ -25,7 +18,7 @@ import { UserService } from './user.service';
           transport: Transport.RMQ,
           options: {
             urls: [`amqp://${user}:${password}@${host}`],
-            queue: 'test-queue',
+            queue: queueName,
             queueOptions: {
               durable: true,
             },
@@ -34,6 +27,5 @@ import { UserService } from './user.service';
       },
     },
   ],
-  exports: [UserService, UserRepository],
 })
-export class UserModule {}
+export class FeedbackModule {}

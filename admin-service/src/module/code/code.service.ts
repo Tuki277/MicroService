@@ -1,5 +1,4 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
-import e from 'express';
+import { Injectable } from '@nestjs/common';
 import { BaseResponse } from 'src/common/base/base.response';
 import { IPagging } from 'src/common/interface';
 import { Code } from './code.entity';
@@ -11,7 +10,7 @@ export class CodeService extends BaseResponse {
     super();
   }
 
-  async getAllCode(req: IPagging) {
+  async getAllCode(req?: IPagging) {
     try {
       return await this.codeRepository.get(req);
     } catch (error) {
