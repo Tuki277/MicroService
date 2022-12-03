@@ -28,7 +28,6 @@ CREATE TABLE `Category` (
   `name` varchar(100)
 );
 
-<<<<<<< HEAD
 INSERT INTO `Category` (`id`, `name`) VALUES
 (3, 'category 1 update'),
 (4, 'category 1'),
@@ -52,26 +51,6 @@ CREATE TABLE `Code` (
 --
 -- Cấu trúc bảng cho bảng `FeedBack`
 --
-=======
-CREATE TABLE `Product` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `category_id` int,
-  `title` varchar(250),
-  `price` int,
-  `discount` int,
-  `thumbnail` varchar(500),
-  `description` longtext,
-  `created_at` datetime,
-  `updated_at` datetime,
-  `deleted` int
-);
-
-CREATE TABLE `Galery` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `product_id` int,
-  `thumbnail` varchar(500)
-);
->>>>>>> user-service
 
 CREATE TABLE `FeedBack` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
