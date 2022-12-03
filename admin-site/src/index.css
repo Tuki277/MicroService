@@ -27,7 +27,7 @@ code {
 .logo {
   height: 32px;
   margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+  background: #e6f7ff !important;
 }
 
 .site-layout .site-layout-background {
@@ -55,4 +55,8 @@ code {
 
 .scroll {
   overflow: scroll;
+}
+
+.ant-layout-sider {
+  background-color: white !important;
 }
