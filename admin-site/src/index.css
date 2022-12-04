@@ -46,6 +46,7 @@ code {
 
 .header__options {
   margin-right: 20px;
+  margin-left: 10px;
   color: #1890ff;
 }
 
@@ -59,4 +60,13 @@ code {
 
 .ant-layout-sider {
   background-color: white !important;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+}
+
+.noti {
+  margin-left: 0px;
 }

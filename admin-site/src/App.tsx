@@ -8,11 +8,12 @@ import {
   ShoppingCartOutlined,
   ShopOutlined,
   RiseOutlined,
-  SettingOutlined,
-  BankOutlined
+  BankOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Popover } from 'antd';
+import { Avatar, Layout, Menu, Popover } from 'antd';
 import './index.css';
+import Noti from './components/Noti';
+import Settings from './components/Settings';
 
 const { Header, Sider, Content } = Layout;
 
@@ -36,44 +37,38 @@ function App() {
             <Menu theme="light" defaultSelectedKeys={["1"]} mode="inline">
               <Menu.Item key="1">
                 <Link to="/">
-                <BankOutlined />
+                  <BankOutlined />
                   <span>Dashboard</span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="2">
                 <Link to="/statistical">
-                <RiseOutlined />
+                  <RiseOutlined />
                   <span>Statistical</span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="3">
                 <Link to="/product">
-                <ShoppingCartOutlined /> 
+                  <ShoppingCartOutlined />
                   <span>Product</span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="4">
                 <Link to="/category">
-                <ShopOutlined />
+                  <ShopOutlined />
                   <span>Category</span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="5">
                 <Link to="/order">
-                  <ShoppingCartOutlined /> 
+                  <ShoppingCartOutlined />
                   <span>Order</span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="6">
                 <Link to="/user">
-                  <UserOutlined /> 
+                  <UserOutlined />
                   <span>User</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="7s">
-                <Link to="/config">
-                <SettingOutlined /> 
-                  <span>Config</span>
                 </Link>
               </Menu.Item>
             </Menu>
@@ -84,12 +79,21 @@ function App() {
                 className: 'trigger',
                 onClick: () => setCollapsed(!collapsed),
               })}
-
-              <Popover content={content} trigger="click">
-                <div className='header__options'>
-                  <span>Tôi là Admin</span>
+              <div className='header__right'>
+                <div>
+                  <Settings />
                 </div>
-              </Popover>
+                <div className='noti'>
+                  <Noti />
+                </div>
+                <Popover content={content} trigger="click">
+                  <div className='header__options'>
+                    <span>
+                      <Avatar style={{ backgroundColor: '#1890ff' }} icon={<UserOutlined />} />
+                    </span>
+                  </div>
+                </Popover>
+              </div>
             </Header>
             <Content
               className="site-layout-background scroll"

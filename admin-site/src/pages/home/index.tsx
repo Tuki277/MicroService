@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Row, Col, Card } from 'antd';
 import './style.css'
 import ChartInOut from '../../components/Chart/ChartInOut';
 import ChartSaleMonth from '../../components/Chart/ChartSaleMonth';
 import ChartOrders from '../../components/Chart/ChartOrders';
+import CardOptions from '../../components/Card';
 
 
 const Home = () => {
@@ -12,24 +13,16 @@ const Home = () => {
       <div className="site-card-wrapper">
         <Row gutter={16}>
           <Col span={6}>
-            <Card title="Category" bordered={true} extra={<a href="#">More</a>}>
-            <span className='float-right'>Category</span> 
-            </Card>
+            <CardOptions title='Category' amount={0} link='/category' />
           </Col>
           <Col span={6}>
-            <Card title="Product" bordered={true} extra={<a href="#">More</a>}>
-              <span className='float-right'>Product</span>
-            </Card>
+            <CardOptions title='Product' amount={0} link='/product' />
           </Col>
           <Col span={6}>
-            <Card title="Orders" bordered={true} extra={<a href="#">More</a>}>
-            <span className='float-right'>Order</span> 
-            </Card>
+            <CardOptions title='Order' amount={0} link='/order' />
           </Col>
           <Col span={6}>
-            <Card title="Money" bordered={true} extra={<a href="#">More</a>}>
-            <span className='float-right'>Money</span>
-            </Card>
+            <CardOptions title='Money' amount={0} link='/statistical' />
           </Col>
         </Row>
       </div>
@@ -39,7 +32,7 @@ const Home = () => {
 
           <Col span={24}>
             <ChartSaleMonth />
-          </Col>
+          </Col>s
         </Row>
       </div>
 

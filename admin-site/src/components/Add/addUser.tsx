@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from 'antd';
+import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd';
 import './style.css';
 
 const { Option } = Select;
 
-const AddUser = () => {
+const AddUser = (props: any) => {
     const [open, setOpen] = useState(false);
 
     const showDrawer = () => {
@@ -18,7 +18,7 @@ const AddUser = () => {
 
     return (
         <Fragment>
-            <Button className='float-right' type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
+            <Button className='float-right mb-2' type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
                 New user
             </Button>
             <Drawer

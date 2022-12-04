@@ -6,11 +6,11 @@ const ChartInOut = () => {
 
     const data = [
         {
-            type: 'Hàng vào',
+            type: 'Product in',
             value: 60,
         },
         {
-            type: 'hàng ra',
+            type: 'Product out',
             value: 40,
         },
     ];

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router';
 import Category from './pages/category';
-import Config from './pages/config';
 import Home from './pages/home';
 import Login from './pages/login/login';
 import Order from './pages/order';
@@ -19,7 +18,6 @@ const routes = () => {
         <Route path='/category' element={ <Category /> }/>
         <Route path='/order' element={ <Order /> }/>
         <Route path='/user' element={ <User /> }/>
-        <Route path='/config' element={ <Config /> }/>
     </Routes>
   )
 }
