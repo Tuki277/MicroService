@@ -1,6 +1,5 @@
 import { DatePicker, Space } from 'antd';
 import type { RangePickerProps } from 'antd/es/date-picker';
-import moment from 'moment';
 import React, { Fragment } from 'react';
 
 const { RangePicker } = DatePicker;

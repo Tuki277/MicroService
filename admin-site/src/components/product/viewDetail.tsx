@@ -1,9 +1,7 @@
 import React, { Fragment, useState } from 'react';
-import { SettingOutlined } from '@ant-design/icons';
-import { Button, Drawer, Select } from 'antd';
-import CardSetting from './cardSetting';
+import { Button, Drawer } from 'antd';
 
-const Settings = () => {
+const ViewDetail = (props: any) => {
     const [open, setOpen] = useState(false);
 
     const showDrawer = () => {
@@ -16,20 +14,20 @@ const Settings = () => {
 
     return (
         <Fragment>
-            <Button type='text' size='large' onClick={showDrawer} icon={<SettingOutlined />}>
+            <Button className='float-right mb-2' type="primary" onClick={showDrawer} >
+                View Image
             </Button>
             <Drawer
-                title="Notification"
-                width={700}
+                title="Detail product"
+                width={1000}
                 onClose={onClose}
                 open={open}
                 bodyStyle={{ paddingBottom: 80 }}
             >
-                <CardSetting />
-                <CardSetting />
+                
             </Drawer>
         </Fragment>
     );
 };
 
-export default Settings;
+export default ViewDetail;

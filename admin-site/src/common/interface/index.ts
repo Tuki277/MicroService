@@ -12,6 +12,7 @@ export interface IDataTypeListUser {
     email: string;
     phone_number: string;
     role: string;
+    status: number;
     created_at: string;
 }
 
@@ -24,6 +25,13 @@ export interface IDataTypeListStatistical {
 export interface IDataListCategory {
     key: React.Key,
     name: string;
+}
+
+export interface IDataListOrder {
+    key: React.Key,
+    title: string;
+    status: number;
+    orderDate: string,
 }
 
 export interface IDataListProduct {

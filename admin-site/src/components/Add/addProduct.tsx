@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from 'antd';
 import './style.css';
+import UploadFileImage from '../uploadFile';
 
 const { Option } = Select;
 
@@ -19,10 +20,10 @@ const AddProduct = () => {
   return (
     <Fragment>
       <Button className='float-right' type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-        New account
+        New product
       </Button>
       <Drawer
-        title="Create a new account"
+        title="Create a new product"
         width={720}
         onClose={onClose}
         open={open}
@@ -38,79 +39,50 @@ const AddProduct = () => {
       >
         <Form layout="vertical" hideRequiredMark>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item
-                name="name"
-                label="Name"
-                rules={[{ required: true, message: 'Please enter user name' }]}
+                name="title"
+                label="Title"
+                rules={[{ required: true, message: 'Please enter title' }]}
               >
-                <Input placeholder="Please enter user name" />
+                <Input placeholder="Please enter title" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
-                name="url"
-                label="Url"
-                rules={[{ required: true, message: 'Please enter url' }]}
+                name="price"
+                label="Price"
+                rules={[{ required: true, message: 'Please enter price' }]}
               >
-                <Input
-                  style={{ width: '100%' }}
-                  addonBefore="http://"
-                  addonAfter=".com"
-                  placeholder="Please enter url"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="owner"
-                label="Owner"
-                rules={[{ required: true, message: 'Please select an owner' }]}
-              >
-                <Select placeholder="Please select an owner">
-                  <Option value="xiao">Xiaoxiao Fu</Option>
-                  <Option value="mao">Maomao Zhou</Option>
-                </Select>
+                <Input placeholder="Please enter price" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
-                name="type"
-                label="Type"
-                rules={[{ required: true, message: 'Please choose the type' }]}
+                name="discount"
+                label="Discount"
               >
-                <Select placeholder="Please choose the type">
-                  <Option value="private">Private</Option>
-                  <Option value="public">Public</Option>
-                </Select>
+                <Input placeholder="Enter discount" />
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
-              <Form.Item
-                name="approver"
-                label="Approver"
-                rules={[{ required: true, message: 'Please choose the approver' }]}
-              >
-                <Select placeholder="Please choose the approver">
-                  <Option value="jack">Jack Ma</Option>
-                  <Option value="tom">Tom Liu</Option>
-                </Select>
+              <Form.Item name="category" label="Category" rules={[{ required: true }]}>
+                  <Select
+                      placeholder="Select a option and change input text above"
+                      allowClear
+                  >
+                      <Option value="male">male</Option>
+                      <Option value="female">female</Option>
+                      <Option value="other">other</Option>
+                  </Select>
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
-                name="dateTime"
-                label="DateTime"
-                rules={[{ required: true, message: 'Please choose the dateTime' }]}
+                name="quantity"
+                label="Quantity"
               >
-                <DatePicker.RangePicker
-                  style={{ width: '100%' }}
-                  getPopupContainer={(trigger) => trigger.parentElement!}
-                />
+                <Input placeholder="Enter quantity" />
               </Form.Item>
             </Col>
           </Row>
@@ -128,6 +100,11 @@ const AddProduct = () => {
               >
                 <Input.TextArea rows={4} placeholder="please enter url description" />
               </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <UploadFileImage />
             </Col>
           </Row>
         </Form>

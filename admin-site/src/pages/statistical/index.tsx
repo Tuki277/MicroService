@@ -4,7 +4,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { IDataTypeListStatistical } from '../../common/interface';
 import { Button, Col, Row, Space } from 'antd';
 import Datepicker from '../../components/Statistical/datepicker';
-import Search from '../../components/Statistical/search';
+import Search from '../../components/search';
 import './index.css'
 
 const Statistical = () => {

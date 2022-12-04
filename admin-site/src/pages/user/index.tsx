@@ -3,10 +3,29 @@ import AddUser from '../../components/Add/addUser';
 import List from '../../components/List';
 import type { ColumnsType } from 'antd/es/table';
 import { IDataTypeListUser } from '../../common/interface';
-import { Button, Space } from 'antd';
-
+import { Button, Col, Row, Select, Space, Switch, Modal } from 'antd';
+import Search from '../../components/search';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+const { Option } = Select;
+const { confirm } = Modal;
 
 const User = () => {
+    const showDeleteConfirm = (id: any) => {
+        console.log(id);
+        confirm({
+          title: 'Are you sure delete this category?',
+          icon: <ExclamationCircleOutlined />,
+          okText: 'Yes',
+          okType: 'danger',
+          cancelText: 'No',
+          onOk() {
+            console.log(id);
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+      };
 
     const columns: ColumnsType<IDataTypeListUser> = [
         {
@@ -31,12 +50,16 @@ const User = () => {
             dataIndex: 'created_at',
         },
         {
+            title: 'Stauts',
+            dataIndex: 'status',
+        },
+        {
             title: 'Action',
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
                     <Button onClick={() => console.log(record)}>Edit</Button>
-                    <Button onClick={() => console.log("delete")}>Delete</Button>
+                    <Button onClick={() => showDeleteConfirm(record)}>Delete</Button>
                 </Space>
             ),
         },
@@ -50,6 +73,7 @@ const User = () => {
             email: `Email ${i}`,
             phone_number: `${i}${i}${i}${i}${i}${i}${i}${i}`,
             role: `Role ${i}`,
+            status: 0,
             created_at: `${i}${i} / ${i}${i} / ${i}${i}${i}${i}`,
         });
     }
@@ -58,7 +82,27 @@ const User = () => {
 
     return (
         <Fragment>
-            <AddUser />
+            <Row gutter={16}>
+                <Col span={12}>
+                    <Search />
+                </Col>
+                <Col span={6}>
+                    <Select
+                        placeholder="Select a option and change input text above"
+                        allowClear
+                    >
+                        <Option value="male">male</Option>
+                        <Option value="female">female</Option>
+                        <Option value="other">other</Option>
+                    </Select>
+                </Col>
+                <Col span={4}>
+                    <Switch defaultChecked /> <span className='ml-1'>Active</span>
+                </Col>
+                <Col span={2}>
+                    <AddUser />
+                </Col>
+            </Row>
             <List columns={columns} data={data} pageSize={pageSize} />
         </Fragment>
     )
