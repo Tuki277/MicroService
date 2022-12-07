@@ -1,37 +1,26 @@
 import React, { Fragment } from 'react'
 import { IDataListProduct } from '../../common/interface';
 import type { ColumnsType } from 'antd/es/table';
-import { Button, Col, Row, Select, Space, Switch, Modal } from 'antd';
+import { Button, Col, Row, Select, Space, Switch } from 'antd';
 import List from '../../components/List';
 import AddProduct from '../../components/Add/addProduct';
 import "./index.css";
 import Search from '../../components/search';
 import ViewDetail from '../../components/product/viewDetail';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { showDeleteConfirm } from '../../components/Modal/DeleteModalConfirm';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import ProductDetail from './ProductDetail';
+import { toggleDetail } from '../../redux/features/system';
 const { Option } = Select;
-const { confirm } = Modal;
 
 const Product = () => {
 
-  const showDeleteConfirm = (id: any) => {
-    console.log(id);
-    confirm({
-      title: 'Are you sure delete this category?',
-      icon: <ExclamationCircleOutlined />,
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        console.log(id);
-      },
-      onCancel() {
-        console.log('Cancel');
-      },
-    });
-  };
+  const dispatch = useDispatch();
 
-  const showDetailConfirm = () => {
-    
+  const showDetailConfirm = (id: number, status: boolean) => {
+    const data = { id: 1, name: 2 };
+    dispatch(toggleDetail(data));
   }
 
   const columns: ColumnsType<IDataListProduct> = [
@@ -74,9 +63,9 @@ const Product = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Button onClick={() => showDetailConfirm()}>Detail</Button>
+          <Button onClick={() => showDetailConfirm(3, true)}>Detail</Button>
           <Button>Edit</Button>
-          <Button onClick={() => showDeleteConfirm(record)}>Delete</Button>
+          <Button onClick={() => showDeleteConfirm(3)}>Delete</Button>
         </Space>
       ),
     },
@@ -124,6 +113,7 @@ const Product = () => {
         </Col>
       </Row>
       <List columns={columns} data={data} pageSize={pageSize} />
+      <ProductDetail />
     </Fragment>
   )
 }

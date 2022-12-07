@@ -1,25 +1,28 @@
 import React from 'react'
 import { Route, Routes } from 'react-router';
-import Category from './pages/category';
-import Home from './pages/home';
-import Login from './pages/login/login';
-import Order from './pages/order';
-import OrderDetail from './pages/order/orderDetail';
-import Product from './pages/product';
-import Statistical from './pages/statistical';
-import User from './pages/user';
+import Category from './pages/Category';
+import Home from './pages/Home';
+import Login from './pages/Login/login';
+import Order from './pages/Order';
+import OrderDetail from './pages/Order/orderDetail';
+import Product from './pages/Product';
+import Statistical from './pages/Statistical';
+import User from './pages/User';
+import ProtectedRoute from './utils/ProtectedRoutes';
 
 const routes = () => {
   return (
     <Routes>
-        <Route path='/login' element={ <Login /> }/>
-        <Route path='/' element={ <Home /> }/>
-        <Route path='/statistical' element={ <Statistical /> }/>
-        <Route path='/product' element={ <Product /> }/>
-        <Route path='/category' element={ <Category /> }/>
-        <Route path='/order' element={ <Order /> }/>
-        <Route path='/order/detail' element={ <OrderDetail /> }/>
-        <Route path='/user' element={ <User /> }/>
+      <Route path='/login' element={<Login />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path='/' element={<Home />} />
+        <Route path='/statistical' element={<Statistical />} />
+        <Route path='/product' element={<Product />} />
+        <Route path='/category' element={<Category />} />
+        <Route path='/order' element={<Order />} />
+        <Route path='/order/detail' element={<OrderDetail />} />
+        <Route path='/user' element={<User />} />
+      </Route>
     </Routes>
   )
 }

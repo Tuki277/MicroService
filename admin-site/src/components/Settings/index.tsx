@@ -1,28 +1,30 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { SettingOutlined } from '@ant-design/icons';
 import { Button, Drawer, Select } from 'antd';
 import CardSetting from './cardSetting';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { toggleSetting } from '../../redux/features/system';
 
 const Settings = () => {
-    const [open, setOpen] = useState(false);
 
-    const showDrawer = () => {
-        setOpen(true);
-    };
+    const dispatch = useDispatch();
 
-    const onClose = () => {
-        setOpen(false);
+    const { setting } = useSelector((state: RootState) => state.system);
+
+    const actionToggleSetting = () => {
+        dispatch(toggleSetting());
     };
 
     return (
         <Fragment>
-            <Button type='text' size='large' onClick={showDrawer} icon={<SettingOutlined />}>
+            <Button type='text' size='large' onClick={actionToggleSetting} icon={<SettingOutlined />}>
             </Button>
             <Drawer
                 title="Notification"
                 width={700}
-                onClose={onClose}
-                open={open}
+                onClose={actionToggleSetting}
+                open={setting}
                 bodyStyle={{ paddingBottom: 80 }}
             >
                 <CardSetting />

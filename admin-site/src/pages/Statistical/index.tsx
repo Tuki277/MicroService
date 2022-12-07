@@ -2,10 +2,13 @@ import React, { Fragment } from 'react'
 import List from '../../components/List';
 import type { ColumnsType } from 'antd/es/table';
 import { IDataTypeListStatistical } from '../../common/interface';
-import { Button, Col, Row, Space } from 'antd';
+import { Button, Col, Modal, Row, Space } from 'antd';
 import Datepicker from '../../components/Statistical/datepicker';
 import Search from '../../components/search';
 import './index.css'
+import { showDeleteConfirm } from '../../components/Modal/DeleteModalConfirm';
+
+const { confirm } = Modal;
 
 const Statistical = () => {
 
@@ -24,7 +27,7 @@ const Statistical = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Button onClick={() => console.log(record)}>Delete</Button>
+          <Button onClick={() => showDeleteConfirm(3)}>Delete</Button>
         </Space>
       ),
     },

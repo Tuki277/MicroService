@@ -1,28 +1,30 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { BellOutlined } from '@ant-design/icons';
-import { Button, Drawer, Select } from 'antd';
+import { Button, Drawer } from 'antd';
 import CardNoti from './cardNoti';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { toggleNoti } from '../../redux/features/system';
 
 const Noti = () => {
-    const [open, setOpen] = useState(false);
 
-    const showDrawer = () => {
-        setOpen(true);
-    };
+    const dispatch = useDispatch();
 
-    const onClose = () => {
-        setOpen(false);
-    };
+    const { noti } = useSelector((state: RootState) => state.system);
+
+    const actionToggleNoti = () => {
+        dispatch(toggleNoti());
+    }
 
     return (
         <Fragment>
-            <Button type='text' size='large' onClick={showDrawer} icon={<BellOutlined />}>
+            <Button type='text' size='large' onClick={actionToggleNoti} icon={<BellOutlined />}>
             </Button>
             <Drawer
                 title="Notification"
                 width={450}
-                onClose={onClose}
-                open={open}
+                onClose={actionToggleNoti}
+                open={noti}
                 bodyStyle={{ paddingBottom: 80 }}
             >
                 <CardNoti />
