@@ -7,5 +7,6 @@ export interface ISystemToggle<T> {
     detail: boolean;
     layout: boolean;
     login: boolean;
+    loading: boolean;
     payload: T;
 }

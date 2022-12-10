@@ -11,6 +11,7 @@ const initialState: ISystemToggle<any> = {
     update: false,
     payload: null,
     login: false,
+    loading: true,
 }
 
 const systemSlice = createSlice({
@@ -47,6 +48,12 @@ const systemSlice = createSlice({
             localStorage.removeItem("refreshToken");
             state.login = false;
             window.location.reload();
+        },
+        showLoading(state) {
+            state.loading = true;
+        },
+        hideLoading(state) {
+            state.loading = false;
         }
     },
     extraReducers: {}
@@ -63,4 +70,6 @@ export const {
     toggleSetting,
     loginSuccess,
     logoutSystem,
+    showLoading,
+    hideLoading,
 } = systemSlice.actions;
