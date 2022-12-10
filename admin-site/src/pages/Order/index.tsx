@@ -5,9 +5,13 @@ import { Button, Col, Row, Space, Switch, Modal } from 'antd';
 import List from '../../components/List';
 import Search from '../../components/search';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 const { confirm } = Modal;
 
 const Order = () => {
+
+  const navigate = useNavigate()
+
   const showDeleteConfirm = (id: any) => {
     console.log(id);
     confirm({
@@ -25,8 +29,8 @@ const Order = () => {
     });
   };
 
-  const showDetailConfirm = () => {
-    
+  const showDetail = () => {
+    navigate("/order/detail/1")
   }
 
   const columns: ColumnsType<IDataListOrder> = [
@@ -48,7 +52,7 @@ const Order = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Button onClick={() => showDetailConfirm()}>Detail</Button>
+          <Button onClick={() => showDetail()}>Detail</Button>
           <Button onClick={() => showDeleteConfirm(record)}>Delete</Button>
         </Space>
       ),

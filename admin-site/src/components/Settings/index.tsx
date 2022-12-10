@@ -28,7 +28,6 @@ const Settings = () => {
                 bodyStyle={{ paddingBottom: 80 }}
             >
                 <CardSetting />
-                <CardSetting />
             </Drawer>
         </Fragment>
     );

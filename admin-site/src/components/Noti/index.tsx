@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { BellOutlined } from '@ant-design/icons';
-import { Button, Drawer } from 'antd';
+import { BellOutlined, NotificationOutlined } from '@ant-design/icons';
+import { Button, Drawer, Badge } from 'antd';
 import CardNoti from './cardNoti';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
@@ -18,8 +18,11 @@ const Noti = () => {
 
     return (
         <Fragment>
-            <Button type='text' size='large' onClick={actionToggleNoti} icon={<BellOutlined />}>
-            </Button>
+            <Badge count={1}>
+                {/* <Button type='text' size='large' onClick={actionToggleNoti} icon={<BellOutlined />}>
+                </Button> */}
+                <BellOutlined style={{ fontSize: 20 }} onClick={actionToggleNoti} />
+            </Badge>
             <Drawer
                 title="Notification"
                 width={450}

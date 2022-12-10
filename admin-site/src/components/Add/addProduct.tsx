@@ -1,20 +1,25 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from 'antd';
+import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd';
 import './style.css';
 import UploadFileImage from '../uploadFile';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { toggleAdd } from '../../redux/features/system';
 
 const { Option } = Select;
 
 const AddProduct = () => {
-  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const { add } = useSelector((state: RootState) => state.system);
 
   const showDrawer = () => {
-    setOpen(true);
+    dispatch(toggleAdd());
   };
 
   const onClose = () => {
-    setOpen(false);
+    dispatch(toggleAdd());
   };
 
   return (
@@ -26,7 +31,7 @@ const AddProduct = () => {
         title="Create a new product"
         width={720}
         onClose={onClose}
-        open={open}
+        open={add}
         bodyStyle={{ paddingBottom: 80 }}
         extra={
           <Space>

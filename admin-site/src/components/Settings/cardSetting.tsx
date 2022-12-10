@@ -1,15 +1,17 @@
-import { Card } from 'antd'
+import { Slider } from 'antd'
 import React, { Fragment } from 'react'
 
 const CardSetting = () => {
+
+    const onchange = (value: number) => {
+
+        console.log(value)
+    }
+
     return (
         <Fragment>
-            <Card style={{ width: 400, marginBottom: 30 }}>
-                <b>Card content</b>
-                <p>Card content</p>
-                <p>Card content</p>
-                <p>Card content</p>
-            </Card>
+            <h3>Khoảng giảm giá</h3>
+            <Slider defaultValue={30} onChange={value => onchange(value)} />
         </Fragment>
     )
 }

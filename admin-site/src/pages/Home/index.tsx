@@ -32,17 +32,17 @@ const Home = () => {
 
           <Col span={24}>
             <ChartSaleMonth />
-          </Col>s
+          </Col>
         </Row>
       </div>
 
       <div className="site-card-wrapper pt-0">
         <Row>
           <Col span={12}>
-            <ChartInOut />
+            <ChartInOut title="In / Out" />
           </Col>
           <Col span={12}>
-            <ChartOrders />
+            <ChartInOut title="Orders process" />
           </Col>
         </Row>
       </div>

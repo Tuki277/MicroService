@@ -20,7 +20,7 @@ const routes = () => {
         <Route path='/product' element={<Product />} />
         <Route path='/category' element={<Category />} />
         <Route path='/order' element={<Order />} />
-        <Route path='/order/detail' element={<OrderDetail />} />
+        <Route path='/order/detail/:orderId' element={<OrderDetail />} />
         <Route path='/user' element={<User />} />
       </Route>
     </Routes>

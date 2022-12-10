@@ -101,9 +101,9 @@ const Layouts = () => {
                                 <Noti />
                             </div>
                             <Popover content={content} trigger="click" className='mr-2'>
-                                <div className='header__options'>
+                                <div className='ml-2'>
                                     <span>
-                                        <Avatar style={{ backgroundColor: '#1890ff' }} icon={<UserOutlined />} />
+                                        <Avatar size={30} style={{ backgroundColor: '#1890ff' }} icon={<UserOutlined />} />
                                     </span>
                                 </div>
                             </Popover>

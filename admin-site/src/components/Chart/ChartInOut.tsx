@@ -2,7 +2,7 @@ import { Card } from 'antd'
 import React from 'react'
 import { Pie } from '@ant-design/plots';
 
-const ChartInOut = () => {
+const ChartInOut = (props: any) => {
 
     const data = [
         {
@@ -38,7 +38,7 @@ const ChartInOut = () => {
     };
 
     return (
-        <Card title="In / Out">
+        <Card title={props.title}>
             <Pie {...config} />
         </Card>
     )

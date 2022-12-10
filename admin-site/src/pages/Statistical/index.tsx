@@ -27,7 +27,7 @@ const Statistical = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Button onClick={() => showDeleteConfirm(3)}>Delete</Button>
+          <Button onClick={() => showDeleteConfirm(3)}>Download</Button>
         </Space>
       ),
     },

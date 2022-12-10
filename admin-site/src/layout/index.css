@@ -7,6 +7,10 @@
     margin-right: 2em;
 }
 
+.ml-2 {
+    margin-left: 1em;
+}
+
 .w-6 {
     width: 6em;
 }

@@ -6,12 +6,10 @@ import List from '../../components/List';
 import AddProduct from '../../components/Add/addProduct';
 import "./index.css";
 import Search from '../../components/search';
-import ViewDetail from '../../components/product/viewDetail';
 import { showDeleteConfirm } from '../../components/Modal/DeleteModalConfirm';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { useDispatch } from 'react-redux';
 import ProductDetail from './ProductDetail';
-import { toggleDetail } from '../../redux/features/system';
+import { toggleAdd, toggleDetail } from '../../redux/features/system';
 const { Option } = Select;
 
 const Product = () => {
@@ -21,6 +19,10 @@ const Product = () => {
   const showDetailConfirm = (id: number, status: boolean) => {
     const data = { id: 1, name: 2 };
     dispatch(toggleDetail(data));
+  }
+
+  const showEdit = () => {
+    dispatch(toggleAdd());
   }
 
   const columns: ColumnsType<IDataListProduct> = [
@@ -46,15 +48,6 @@ const Product = () => {
       dataIndex: 'quantity',
     },
     {
-      title: 'Thumbnail',
-      key: 'thumbnail',
-      render: (_, record) => (
-        <Space size="middle">
-          <ViewDetail />
-        </Space>
-      ),
-    },
-    {
       title: 'Created',
       dataIndex: 'created_at',
     },
@@ -64,7 +57,7 @@ const Product = () => {
       render: (_, record) => (
         <Space size="middle">
           <Button onClick={() => showDetailConfirm(3, true)}>Detail</Button>
-          <Button>Edit</Button>
+          <Button onClick={() => showEdit()}>Edit</Button>
           <Button onClick={() => showDeleteConfirm(3)}>Delete</Button>
         </Space>
       ),
