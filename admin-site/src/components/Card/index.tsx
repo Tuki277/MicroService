@@ -3,7 +3,8 @@ import { Card, Statistic } from 'antd';
 import { IPropCard } from '../../common/interface';
 import { Link } from 'react-router-dom';
 import {
-  ArrowUpOutlined
+  ArrowUpOutlined,
+  ArrowDownOutlined
 } from '@ant-design/icons';
 
 const CardOptions = (props: IPropCard) => {
@@ -13,11 +14,18 @@ const CardOptions = (props: IPropCard) => {
             <span className='float-right'>{ props.amount }</span>
         </Card> */}
         <Card title={ props.title } bordered={true} extra={<Link to={ props.link }>More</Link>}>
-          <Statistic
+          {/* <Statistic
             value={props.amount}
             precision={2}
             valueStyle={{ color: '#3f8600' }}
             prefix={<ArrowUpOutlined />}
+            suffix="%"
+          /> */}
+          <Statistic
+            value={props.amount}
+            precision={2}
+            valueStyle={{ color: '#cf1322' }}
+            prefix={<ArrowDownOutlined />}
             suffix="%"
           />
         </Card>
