@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { SettingOutlined } from '@ant-design/icons';
 import { Button, Drawer, Select } from 'antd';
-import CardSetting from './cardSetting';
+import CardSetting from './CardSetting';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { toggleSetting } from '../../redux/features/system';

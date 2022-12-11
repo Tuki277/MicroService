@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toggleDetail } from '../../redux/features/system'
-import ProductDetail from '../../components/product/viewDetail'
+import ProductDetail from '../../components/Product/DetailProduct'
 import "./index.css"
 
 const OrderDetail = () => {

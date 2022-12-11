@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd';
 import './style.css';
-import UploadFileImage from '../uploadFile';
+import UploadFileImage from '../UploadFile/UploadFile';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { toggleAdd } from '../../redux/features/system';

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ISystemToggle } from "../../common/interface/systemInterface";
+import { ISystemToggle } from "../../common/interface/SystemInterface";
 
 const initialState: ISystemToggle<any> = {
     add: false,

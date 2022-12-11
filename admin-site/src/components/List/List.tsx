@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Table } from 'antd';
 import { IList } from '../../common/interface';
 import './index.css';
-import Loading from '../Loading';
+import Loading from '../Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { hideLoading } from '../../redux/features/system';

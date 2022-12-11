@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
-import AddUser from '../../components/Add/addUser';
-import List from '../../components/List';
+import AddUser from '../../components/Add/AddUser';
+import List from '../../components/List/List';
 import type { ColumnsType } from 'antd/es/table';
 import { IDataTypeListUser } from '../../common/interface';
 import { Button, Col, Row, Select, Space, Switch, Modal } from 'antd';

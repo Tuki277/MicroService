@@ -5,7 +5,7 @@ import ChartInOut from '../../components/Chart/ChartInOut';
 import ChartSaleMonth from '../../components/Chart/ChartSaleMonth';
 import ChartOrders from '../../components/Chart/ChartOrders';
 import CardOptions from '../../components/Card';
-import Feedback from '../../components/Card/feedback';
+import Feedback from '../../components/Card/Feedback';
 
 
 const Home = () => {

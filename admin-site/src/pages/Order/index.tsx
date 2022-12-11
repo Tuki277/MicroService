@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { IDataListOrder } from '../../common/interface';
 import type { ColumnsType } from 'antd/es/table';
 import { Button, Col, Row, Space, Switch, Modal } from 'antd';
-import List from '../../components/List';
+import List from '../../components/List/List';
 import Search from '../../components/search';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';

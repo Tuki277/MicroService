@@ -11,8 +11,8 @@ import {
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { Avatar, Button, Layout, Menu, Popover } from 'antd';
-import Noti from '../components/Noti';
-import Settings from '../components/Settings';
+import Noti from '../components/Noti/Noti';
+import Settings from '../components/Settings/Setting';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { logoutSystem, toggleCollapsedNav } from '../redux/features/system';

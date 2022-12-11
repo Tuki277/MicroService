@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
-import List from '../../components/List';
+import List from '../../components/List/List';
 import type { ColumnsType } from 'antd/es/table';
 import { IDataTypeListStatistical } from '../../common/interface';
 import { Button, Col, Modal, Row, Space } from 'antd';
-import Datepicker from '../../components/Statistical/datepicker';
+import Datepicker from '../../components/Statistical/Datepicker';
 import Search from '../../components/search';
 import './index.css'
 import { showDeleteConfirm } from '../../components/Modal/DeleteModalConfirm';

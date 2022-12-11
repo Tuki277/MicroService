@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { BellOutlined, NotificationOutlined } from '@ant-design/icons';
 import { Button, Drawer, Badge } from 'antd';
-import CardNoti from './cardNoti';
+import CardNoti from './CardNoti';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { toggleNoti } from '../../redux/features/system';

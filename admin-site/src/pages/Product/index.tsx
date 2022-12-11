@@ -2,13 +2,13 @@ import React, { Fragment } from 'react'
 import { IDataListProduct } from '../../common/interface';
 import type { ColumnsType } from 'antd/es/table';
 import { Button, Col, message, Row, Select, Space, Switch } from 'antd';
-import List from '../../components/List';
-import AddProduct from '../../components/Add/addProduct';
+import List from '../../components/List/List';
+import AddProduct from '../../components/Add/AddProduct';
 import "./index.css";
 import Search from '../../components/search';
 import { showDeleteConfirm } from '../../components/Modal/DeleteModalConfirm';
 import { useDispatch } from 'react-redux';
-import ProductDetail from './../../components/product/viewDetail';
+import ProductDetail from '../../components/Product/DetailProduct';
 import { toggleAdd, toggleDetail } from '../../redux/features/system';
 const { Option } = Select;
 

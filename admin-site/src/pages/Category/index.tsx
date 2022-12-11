@@ -2,8 +2,8 @@ import React, { Fragment, useState } from 'react'
 import { IDataListCategory } from '../../common/interface';
 import type { ColumnsType } from 'antd/es/table';
 import { Button, Space, Modal } from 'antd';
-import List from '../../components/List';
-import AddCategory from '../../components/Add/addCategory';
+import List from '../../components/List/List';
+import AddCategory from '../../components/Add/AddCategory';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 const { confirm } = Modal;
 
