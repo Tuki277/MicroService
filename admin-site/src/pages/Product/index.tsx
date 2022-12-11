@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react'
 import { IDataListProduct } from '../../common/interface';
 import type { ColumnsType } from 'antd/es/table';
-import { Button, Col, Row, Select, Space, Switch } from 'antd';
+import { Button, Col, message, Row, Select, Space, Switch } from 'antd';
 import List from '../../components/List';
 import AddProduct from '../../components/Add/addProduct';
 import "./index.css";
 import Search from '../../components/search';
 import { showDeleteConfirm } from '../../components/Modal/DeleteModalConfirm';
 import { useDispatch } from 'react-redux';
-import ProductDetail from './ProductDetail';
+import ProductDetail from './../../components/product/viewDetail';
 import { toggleAdd, toggleDetail } from '../../redux/features/system';
 const { Option } = Select;
 
@@ -18,6 +18,7 @@ const Product = () => {
 
   const showDetailConfirm = (id: number, status: boolean) => {
     const data = { id: 1, name: 2 };
+    message.success('This is a success message');
     dispatch(toggleDetail(data));
   }
 
