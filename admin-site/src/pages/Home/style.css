@@ -1,0 +1,28 @@
+.site-card-wrapper {
+    padding: 30px;
+    background: #ffff;
+  }
+  
+  [data-theme="dark"] .site-card-wrapper {
+    background: #303030;
+  }
+
+.ant-card-head-title {
+    font-weight: bold !important;
+}
+
+.pt-0 {
+    padding-top: 0px !important;
+}
+
+.height-600 {
+    height: 600px !important;
+}
+
+.float-right {
+    float: right;
+}
+
+.site-layout {
+    background-color: #f0f2f5 !important;
+}

@@ -27,7 +27,7 @@ code {
 .logo {
   height: 32px;
   margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+  background: #e6f7ff !important;
 }
 
 .site-layout .site-layout-background {
@@ -46,6 +46,7 @@ code {
 
 .header__options {
   margin-right: 20px;
+  margin-left: 10px;
   color: #1890ff;
 }
 
@@ -55,4 +56,17 @@ code {
 
 .scroll {
   overflow: scroll;
+}
+
+.ant-layout-sider {
+  background-color: white !important;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+}
+
+.noti {
+  margin-left: 0px;
 }

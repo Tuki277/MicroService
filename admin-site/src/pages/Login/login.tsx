@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./style.css";
 import img from '../../assets/img/login_img01.jpg';
 import { Button, Checkbox, Form, Input } from 'antd';
 import 'antd/dist/antd.css';
+import { ILogin } from '../../common/interface/LoginInterface';
 
 const Login = () => {
 
+  const [state, setState] = useState<ILogin>({
+    username: "123",
+    password: "",
+  })
+
   const [form] = Form.useForm();
+
+  const onFinish = (values: ILogin) => {
+    state.username = "";
+    setState(state);
+    console.log({ state });
+    console.log('Success:', values);
+    form.resetFields();
+  };
 
   return (
     <div className='wrapper flex justify-center align-middle'>
@@ -17,6 +31,8 @@ const Login = () => {
           <p>Vui lòng đăng nhập tài khoản của bạn</p>
 
           <Form
+            form={form}
+            onFinish={onFinish}
             name="normal_login"
             className="login-form"
             initialValues={{ remember: true }}
