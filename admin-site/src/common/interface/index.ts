@@ -47,6 +47,21 @@ export interface IDataListProduct {
     created_at: string;
 }
 
+export interface IDataListFeedback {
+    key: React.Key;
+    name: string;
+    email: string;
+    phoneNumber: string;
+    note: string;
+    created_at: string;
+}
+
+export interface IDataListCode {
+    key: React.Key;
+    code: string;
+    discount: number;
+}
+
 export interface IList {
     columns: any;
     data: any;

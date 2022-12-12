@@ -8,6 +8,8 @@ import {
     ShopOutlined,
     RiseOutlined,
     BankOutlined,
+    WalletOutlined,
+    ExceptionOutlined
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { Avatar, Button, Layout, Menu, Popover } from 'antd';
@@ -58,31 +60,43 @@ const Layouts = () => {
                         <Menu.Item key="2">
                             <Link to="/statistical">
                                 <RiseOutlined />
-                                <span>Statistical</span>
+                                <span>Báo cáo</span>
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="3">
                             <Link to="/product">
                                 <ShoppingCartOutlined />
-                                <span>Product</span>
+                                <span>Sản phẩm</span>
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="4">
                             <Link to="/category">
                                 <ShopOutlined />
-                                <span>Category</span>
+                                <span>Danh mục</span>
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="5">
                             <Link to="/order">
                                 <ShoppingCartOutlined />
-                                <span>Order</span>
+                                <span>Đặt hàng</span>
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="6">
+                            <Link to="/code">
+                                <WalletOutlined />
+                                <span>Mã giảm giá</span>
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key="7">
+                            <Link to="/feedback">
+                                <ExceptionOutlined />
+                                <span>Phản hồi khách hàng</span>
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key="8">
                             <Link to="/user">
                                 <UserOutlined />
-                                <span>User</span>
+                                <span>Người dùng</span>
                             </Link>
                         </Menu.Item>
                     </Menu>
