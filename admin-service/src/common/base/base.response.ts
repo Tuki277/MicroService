@@ -11,10 +11,12 @@ export class BaseResponse {
     res: ResponseExpress,
     statusCode: HttpStatus,
     data?: T,
+    count?: number,
   ) => {
     if (statusCode == HttpStatus.OK) {
       res.status(HttpStatus.OK).send({
         statusCode: HttpStatus.OK,
+        count,
         data,
         message: 'Success',
       });

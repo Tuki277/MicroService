@@ -42,4 +42,8 @@ export class CategoryRepository {
       where: [input],
     });
   }
+
+  async count(): Promise<number> {
+    return await this.categoryEntity.count();
+  }
 }

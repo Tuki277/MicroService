@@ -63,4 +63,12 @@ export class CategoryService extends BaseResponse {
       this.errorResponse(error.message);
     }
   }
+
+  async getCount() {
+    try {
+      return await this.categoryRepository.count();
+    } catch (error) {
+      this.errorResponse(error.message);
+    }
+  }
 }

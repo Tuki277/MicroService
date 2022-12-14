@@ -24,7 +24,8 @@ export class CategoryController extends BaseResponse {
       page: (req.query as any).page,
       rowperpage: (req.query as any).rowperpage,
     });
-    return this.jsonResponse(res, HttpStatus.OK, data);
+    const count = await this.categoryService.getCount();
+    return this.jsonResponse(res, HttpStatus.OK, data, count);
   }
 
   @Post()

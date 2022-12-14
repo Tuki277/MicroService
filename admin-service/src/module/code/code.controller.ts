@@ -8,7 +8,7 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
-import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
+import { MessagePattern } from '@nestjs/microservices';
 import { Request, Response } from 'express';
 import { BaseResponse } from 'src/common/base/base.response';
 import { Code } from './code.entity';
@@ -53,6 +53,19 @@ export class CodeController extends BaseResponse {
     const id: number = parseInt(req.params.id);
     await this.codeService.deleteCode(id);
     return this.jsonResponse(res, HttpStatus.NO_CONTENT);
+  }
+
+  @Post('process-discount')
+  async processDiscount(@Req() req: Request, @Res() res: Response) {
+    const payload = {
+      code: req.body.code,
+      totalPrice: req.body.totalPrice,
+    };
+    const price = await this.codeService.processCode(payload);
+    const data = {
+      price,
+    };
+    return this.jsonResponse(res, HttpStatus.OK, data);
   }
 
   @MessagePattern({ cmd: 'find-code' })
