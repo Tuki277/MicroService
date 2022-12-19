@@ -8,5 +8,11 @@ export interface ISystemToggle<T> {
     layout: boolean;
     login: boolean;
     loading: boolean;
+    id: number;
     payload: T;
+}
+
+export interface IPagging {
+    page: number;
+    rowperpage: number;
 }

@@ -5,31 +5,44 @@ import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
 import { resetPayload, toggleAdd } from '../../redux/features/system';
-import { addCategory, getAllCategory, updateCategory } from '../../redux/features/category';
+import { addCode, getAllCode, updateCode } from '../../redux/features/code';
 
-const AddCategory = (props: any) => {
+const AddCode = (props: any) => {
 
     const dispatch = useDispatch<AppDispatch>();
 
     const { add, payload } = useSelector((state: RootState) => state.system);
     const { error } = useSelector((state: RootState) => state.category);
 
-    const [name, setName] = useState<string>("");
+    const [state, setState] = useState({
+        code: "",
+        discount: "",
+    });
 
     const showDrawer = () => {
         dispatch(toggleAdd());
     };
 
     const onClose = () => {
-        dispatch(getAllCategory());
+        dispatch(getAllCode());
+        setState({
+            code: "",
+            discount: ""
+        });
         dispatch(toggleAdd());
     };
 
     const createCategory = () => {
         if (payload == null) {
-            dispatch(addCategory({ name }));
+            dispatch(addCode({
+                code: state.code,
+                discount: state.discount,
+            }));
             if (!error) {
-                setName("");
+                setState({
+                    code: "",
+                    discount: ""
+                });
                 message.success("Created success");
                 onClose();
             } else {
@@ -39,12 +52,16 @@ const AddCategory = (props: any) => {
             const input = {
                 id: payload.payload.id,
                 data: {
-                    name,
+                    code: state.code,
+                    discount: state.discount
                 }
             }
-            dispatch(updateCategory(input));
+            dispatch(updateCode(input));
             if (!error) {
-                setName("");
+                setState({
+                    code: "",
+                    discount: ""
+                });
                 message.success("Update success");
                 dispatch(resetPayload());
                 onClose();
@@ -55,22 +72,28 @@ const AddCategory = (props: any) => {
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value);
+        setState({
+            ...state,
+            [event.target.name]: event.target.value
+        })
     }
 
     useEffect(() => {
         if (payload != null) {
-            setName(payload.payload.name)
+            setState({
+                code: payload.payload.code,
+                discount: payload.payload.discount
+            })
         }
     }, [payload])
 
     return (
         <Fragment>
             <Button className='float-right mb-2' type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-                { payload == null ? "New category" : "Update category" } 
+                {payload == null ? "New code" : "Update code"}
             </Button>
             <Drawer
-                title="Create a new category"
+                title="Create a new code"
                 width={720}
                 onClose={onClose}
                 open={add}
@@ -79,29 +102,20 @@ const AddCategory = (props: any) => {
                     <Space>
                         <Button onClick={onClose}>Cancel</Button>
                         <Button onClick={createCategory} type="primary">
-                        { payload == null ? "Create" : "Update" } 
+                            {payload == null ? "Create" : "Update"}
                         </Button>
                     </Space>
                 }
             >
-                {/* <Form 
-                    layout="vertical"
-                > */}
-                    <Row gutter={16}>
-                        <Col span={24}>
-                            {/* <Form.Item
-                                name="name"
-                                label="Category name"
-                                rules={[{ required: true, message: 'Please enter category name' }]}
-                            > */}
-                                <Input value={name} name='name' placeholder="Please enter category name" onChange={(event: ChangeEvent<HTMLInputElement>) => onChange(event)} />
-                            {/* </Form.Item> */}
-                        </Col>
-                    </Row>
-                {/* </Form> */}
+                <Row gutter={16}>
+                    <Col span={24}>
+                        <Input value={state.code} name='code' placeholder="Please enter code name" onChange={(event: ChangeEvent<HTMLInputElement>) => onChange(event)} />
+                        <Input style={{  marginTop: 15 }} value={state.discount} name='discount' placeholder="Please enter discount" onChange={(event: ChangeEvent<HTMLInputElement>) => onChange(event)} />
+                    </Col>
+                </Row>
             </Drawer>
         </Fragment>
     );
 };
 
-export default AddCategory;
+export default AddCode;

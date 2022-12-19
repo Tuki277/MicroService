@@ -12,20 +12,21 @@ const initialState: ISystemToggle<any> = {
     payload: null,
     login: false,
     loading: true,
+    id: 0,
 }
 
 const systemSlice = createSlice({
     name: "System",
     initialState,
     reducers: {
-        toggleAdd(statte) {
-            statte.add = !statte.add
+        toggleAdd(state) {
+            state.add = !state.add;
         },
-        toggleCollapsedNav(statte) {
-            statte.collapsedNav = !statte.collapsedNav
+        toggleCollapsedNav(state) {
+            state.collapsedNav = !state.collapsedNav
         },
-        toggleLayout(statte) {
-            statte.layout = !statte.layout
+        toggleLayout(state) {
+            state.layout = !state.layout
         },
         toggleDetail(state, payload) {
             state.detail = !state.detail;
@@ -38,7 +39,7 @@ const systemSlice = createSlice({
             state.setting = !state.setting;
         },
         toggleUpdate(state, payload) {
-            state.update = !state.update;
+            state.add = !state.update;
             state.payload = payload;
         },
         loginSuccess(state) {
@@ -54,6 +55,9 @@ const systemSlice = createSlice({
         },
         hideLoading(state) {
             state.loading = false;
+        },
+        resetPayload(state) {
+            state.payload = null;
         }
     },
     extraReducers: {}
@@ -72,4 +76,6 @@ export const {
     logoutSystem,
     showLoading,
     hideLoading,
+    toggleUpdate,
+    resetPayload,
 } = systemSlice.actions;

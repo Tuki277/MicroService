@@ -23,10 +23,6 @@ const CardOptions = (props: IPropCard) => {
           /> */}
           <Statistic
             value={props.amount}
-            precision={2}
-            valueStyle={{ color: '#cf1322' }}
-            prefix={<ArrowDownOutlined />}
-            suffix="%"
           />
         </Card>
     </Fragment>

@@ -1,18 +1,41 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { IDataListCategory } from '../../common/interface';
 import type { ColumnsType } from 'antd/es/table';
-import { Button, Space, Modal } from 'antd';
+import { Button, Space, Modal, message } from 'antd';
 import List from '../../components/List/List';
 import AddCategory from '../../components/Add/AddCategory';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteCategory, getAllCategory } from '../../redux/features/category';
+import { AppDispatch, RootState } from '../../redux/store';
+import { hideLoading, showLoading, toggleAdd, toggleUpdate } from '../../redux/features/system';
 const { confirm } = Modal;
 
 const Category = () => {
+  const dispatch = useDispatch<AppDispatch>();
 
-  const [open, setOpen] = useState(false);
+  const { data, error } = useSelector((state: RootState) => state.category);
+
+  useEffect(() => {
+    dispatch(showLoading());
+    dispatch(getAllCategory());
+    setTimeout(() => {
+      dispatch(hideLoading());
+    }, 1000)
+  }, [])
+
+  const deleteSuccess = (id: string) => {
+    dispatch(deleteCategory(id));
+    if (!error) {
+      message.success("Delete success");
+      dispatch(getAllCategory());
+    } else {
+      message.error("Delete fail");
+    }
+  }
 
 
-  const showDeleteConfirm = (id: any) => {
+  const showDeleteConfirm = (id: string) => {
     console.log(id);
     confirm({
       title: 'Are you sure delete this category?',
@@ -21,51 +44,36 @@ const Category = () => {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        console.log(id);
+        deleteSuccess(id);
       },
-      onCancel() {
-        console.log('Cancel');
-      },
+      onCancel() {},
     });
   };
 
-  const editData = (id: any) => {
-    console.log(id);
-    setOpen(true);
+  const editData = (data: any) => {
+    dispatch(toggleUpdate(data));
   }
 
   const columns: ColumnsType<IDataListCategory> = [
     {
       title: 'Name',
       dataIndex: 'name',
-      key: ''
     },
     {
       title: 'Action',
-      key: 'action',
-      render: (_, record) => (
+      render: (_, record: any) => (
         <Space size="middle">
           <Button onClick={() => editData(record)}>Edit</Button>
-          <Button onClick={() => showDeleteConfirm(record)}>Delete</Button>
+          <Button onClick={() => showDeleteConfirm(record.id)}>Delete</Button>
         </Space>
       ),
     },
   ];
 
-  const data: IDataListCategory[] = [];
-  for (let i = 0; i < 46; i++) {
-    data.push({
-      key: i,
-      name: `Category ${i}`
-    });
-  }
-
-  const pageSize = 20;
-
   return (
     <Fragment>
-      <AddCategory data={open} />
-      <List columns={columns} data={data} pageSize={pageSize} />
+      <AddCategory />
+      <List columns={columns} data={data} pageSize={20} />
     </Fragment>
   )
 }

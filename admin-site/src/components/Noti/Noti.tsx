@@ -24,7 +24,7 @@ const Noti = () => {
                 <BellOutlined style={{ fontSize: 20 }} onClick={actionToggleNoti} />
             </Badge>
             <Drawer
-                title="Notification"
+                title="Thông báo"
                 width={450}
                 onClose={actionToggleNoti}
                 open={noti}
