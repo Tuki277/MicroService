@@ -19,9 +19,16 @@ export class CategoryRepository {
       return await this.categoryEntity.find({
         take: req.rowperpage,
         skip,
+        order: {
+          id: 'DESC',
+        },
       });
     }
-    return await this.categoryEntity.find();
+    return await this.categoryEntity.find({
+      order: {
+        id: 'DESC',
+      },
+    });
   }
 
   async post(input: Partial<Category>): Promise<Category> {

@@ -6,7 +6,6 @@ import {
   DeleteResult,
   UpdateResult,
   FindOptionsWhere,
-  Like,
 } from 'typeorm';
 import { Product } from './product.entity';
 
@@ -17,6 +16,10 @@ export class ProductRepository {
     private productEntity: Repository<Product>,
   ) {}
 
+  async count(): Promise<number> {
+    return await this.productEntity.count();
+  }
+
   async get(req: IPagging): Promise<Product[]> {
     if (req.page != undefined && req.rowperpage != undefined) {
       const skip: number =
@@ -26,10 +29,16 @@ export class ProductRepository {
         relations: ['category'],
         take: req.rowperpage,
         skip,
+        order: {
+          created_at: 'DESC',
+        },
       });
     } else {
       return await this.productEntity.find({
         relations: ['category'],
+        order: {
+          created_at: 'DESC',
+        },
       });
     }
   }

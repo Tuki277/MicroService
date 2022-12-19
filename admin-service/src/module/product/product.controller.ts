@@ -25,7 +25,8 @@ export class ProductController extends BaseResponse {
       page: (req.query as any).page,
       rowperpage: (req.query as any).rowperpage,
     });
-    return this.jsonResponse(res, HttpStatus.OK, data);
+    const count: number = await this.productService.countProduct();
+    return this.jsonResponse(res, HttpStatus.OK, data, count);
   }
 
   @Post()

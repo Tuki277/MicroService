@@ -10,6 +10,10 @@ export class ProductService extends BaseResponse {
     super();
   }
 
+  async countProduct(): Promise<number> {
+    return await this.productRepository.count();
+  }
+
   async getAllProduct(req: IPagging) {
     try {
       return await this.productRepository.get(req);

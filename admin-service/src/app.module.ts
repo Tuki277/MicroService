@@ -15,6 +15,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { Gallery } from './module/gallery/gallery.entity';
 import { FeedbackModule } from './module/feedback/feedback.module';
+import { DashboardModule } from './module/dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { FeedbackModule } from './module/feedback/feedback.module';
     ProductModule,
     GalleryModule,
     FeedbackModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
