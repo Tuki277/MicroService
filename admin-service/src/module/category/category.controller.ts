@@ -20,8 +20,12 @@ export class CategoryController extends BaseResponse {
   }
   @Get()
   async getAllCategoryController(@Req() req: Request, @Res() res: Response) {
-    const data: Category[] = await this.categoryService.getAllCategory();
-    return this.jsonResponse(res, HttpStatus.OK, data);
+    const data: Category[] = await this.categoryService.getAllCategory({
+      page: (req.query as any).page,
+      rowperpage: (req.query as any).rowperpage,
+    });
+    const count = await this.categoryService.getCount();
+    return this.jsonResponse(res, HttpStatus.OK, data, count);
   }
 
   @Post()

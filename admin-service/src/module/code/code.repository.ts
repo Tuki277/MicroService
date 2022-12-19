@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { IPagging } from 'src/common/interface';
 import { Repository, DeleteResult, UpdateResult } from 'typeorm';
 import { Code } from './code.entity';
 
@@ -10,7 +11,16 @@ export class CodeRepository {
     private codeEntity: Repository<Code>,
   ) {}
 
-  async get(): Promise<Code[]> {
+  async get(req: IPagging): Promise<Code[]> {
+    if (req.page != undefined && req.rowperpage != undefined) {
+      const skip: number =
+        (parseInt(req.page.toString()) - 1) *
+        parseInt(req.rowperpage.toString());
+      return await this.codeEntity.find({
+        take: req.rowperpage,
+        skip,
+      });
+    }
     return await this.codeEntity.find();
   }
 

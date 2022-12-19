@@ -1,0 +1,14 @@
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.spin {
+    font-size: 100px;
+}
+
+p {
+    font-size: 20px;
+}

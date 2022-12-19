@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { IPagging } from 'src/common/interface';
 import { Repository, DeleteResult, UpdateResult } from 'typeorm';
 import { Category } from './category.entity';
 
@@ -10,8 +11,24 @@ export class CategoryRepository {
     private categoryEntity: Repository<Category>,
   ) {}
 
-  async get(): Promise<Category[]> {
-    return await this.categoryEntity.find();
+  async get(req?: IPagging): Promise<Category[]> {
+    if (req.page != undefined && req.rowperpage != undefined) {
+      const skip: number =
+        (parseInt(req.page.toString()) - 1) *
+        parseInt(req.rowperpage.toString());
+      return await this.categoryEntity.find({
+        take: req.rowperpage,
+        skip,
+        order: {
+          id: 'DESC',
+        },
+      });
+    }
+    return await this.categoryEntity.find({
+      order: {
+        id: 'DESC',
+      },
+    });
   }
 
   async post(input: Partial<Category>): Promise<Category> {
@@ -31,5 +48,9 @@ export class CategoryRepository {
     return await this.categoryEntity.find({
       where: [input],
     });
+  }
+
+  async count(): Promise<number> {
+    return await this.categoryEntity.count();
   }
 }
