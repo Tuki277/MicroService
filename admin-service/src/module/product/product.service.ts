@@ -3,6 +3,11 @@ import { BaseResponse } from 'src/common/base/base.response';
 import { IPagging } from 'src/common/interface';
 import { Product } from './product.entity';
 import { ProductRepository } from './product.repository';
+import {
+  createProductSchema,
+  deleteProductSchema,
+  updateProductSchema,
+} from './product.validate';
 
 @Injectable()
 export class ProductService extends BaseResponse {
@@ -24,6 +29,7 @@ export class ProductService extends BaseResponse {
 
   async createProduct(input: Partial<Product>) {
     try {
+      // await createProductSchema.validateAsync(input);
       return await this.productRepository.post(input);
     } catch (error) {
       this.errorResponse(error.message);
@@ -40,6 +46,7 @@ export class ProductService extends BaseResponse {
 
   async deleteProduct(id: number) {
     try {
+      await deleteProductSchema.validateAsync(id);
       const codeIsExits: Product[] = await this.productRepository.find({
         id,
       });
@@ -55,6 +62,10 @@ export class ProductService extends BaseResponse {
 
   async updateProduct(id: number, input: Partial<Product>) {
     try {
+      await updateProductSchema.validateAsync({
+        input,
+        id,
+      });
       const codeIsExits: Product[] = await this.productRepository.find({
         id,
       });

@@ -25,7 +25,10 @@ export class FakeController extends BaseResponse {
       const data: Partial<Product> = {
         category: randCategory.id,
         title: faker.commerce.productName(),
-        price: faker.commerce.price(100, 200, 0, '$'),
+        price: faker.datatype.number({
+          min: 100,
+          max: 800,
+        }),
         discount: faker.datatype.number({
           min: 0,
           max: 100,

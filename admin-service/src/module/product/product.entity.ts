@@ -17,7 +17,7 @@ export class Product {
   title: string;
 
   @Column({ default: 0 })
-  price: string;
+  price: number;
 
   @Column({ default: 0 })
   discount: number;

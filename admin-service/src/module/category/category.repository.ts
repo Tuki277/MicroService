@@ -12,17 +12,19 @@ export class CategoryRepository {
   ) {}
 
   async get(req?: IPagging): Promise<Category[]> {
-    if (req.page != undefined && req.rowperpage != undefined) {
-      const skip: number =
-        (parseInt(req.page.toString()) - 1) *
-        parseInt(req.rowperpage.toString());
-      return await this.categoryEntity.find({
-        take: req.rowperpage,
-        skip,
-        order: {
-          id: 'DESC',
-        },
-      });
+    if (req != undefined) {
+      if (req.page != undefined && req.rowperpage != undefined) {
+        const skip: number =
+          (parseInt(req.page.toString()) - 1) *
+          parseInt(req.rowperpage.toString());
+        return await this.categoryEntity.find({
+          take: req.rowperpage,
+          skip,
+          order: {
+            id: 'DESC',
+          },
+        });
+      }
     }
     return await this.categoryEntity.find({
       order: {
