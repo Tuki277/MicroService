@@ -11,22 +11,22 @@ export class Orders {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  user_id: number;
+  @Column({ nullable: false })
+  userId: number;
 
-  @Column()
+  @Column({ default: '' })
   fullname: string;
 
-  @Column()
+  @Column({ default: '' })
   email: string;
 
-  @Column()
-  phone_number: string;
+  @Column({ default: '' })
+  phoneNumber: string;
 
-  @Column()
+  @Column({ default: '' })
   address: string;
 
-  @Column()
+  @Column({ default: '' })
   note: string;
 
   @CreateDateColumn({
@@ -35,11 +35,11 @@ export class Orders {
   })
   order_date: Date;
 
-  @Column()
-  status: number;
+  @Column({ default: 0 })
+  status: number; // 0 session // 1 pending, 2 processed, 3 // finish
 
-  @Column()
-  total_money: number;
+  @Column({ default: 0 })
+  totalMoney: number;
 }
 
 @Entity()
@@ -48,17 +48,17 @@ export class Order_Detail {
   id: number;
 
   @ManyToOne(() => Orders, { nullable: false })
-  order_id: number;
+  order: number;
 
   @Column()
-  product_id: number;
+  productId: number;
 
   @Column()
-  price: number;
+  price: string;
 
   @Column()
-  num: number;
+  quantity: number;
 
-  @Column()
-  total_meney: number;
+  @Column({ default: 0 })
+  totalMoney: number;
 }

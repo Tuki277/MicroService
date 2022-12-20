@@ -102,4 +102,12 @@ export class OrderService extends BaseResponse {
       this.errorResponse(error.message);
     }
   }
+
+  async findOrderById(id: number): Promise<Orders[]> {
+    try {
+      return await this.orderService.findOrder({ userId: id });
+    } catch (error) {
+      this.errorResponse(error.message);
+    }
+  }
 }

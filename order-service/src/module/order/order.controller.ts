@@ -3,6 +3,7 @@ import {
   Delete,
   Get,
   HttpStatus,
+  Inject,
   Post,
   Put,
   Req,
@@ -12,12 +13,58 @@ import { BaseResponse } from 'src/common/base/base.response';
 import { Orders, Order_Detail } from './order.entity';
 import { OrderService } from './order.service';
 import { Request, Response } from 'express';
+import { ClientProxy } from '@nestjs/microservices';
+import { lastValueFrom, map } from 'rxjs';
 
 @Controller('order')
 export class OrderController extends BaseResponse {
-  constructor(private orderService: OrderService) {
+  constructor(
+    @Inject('TEST_SERVICE')
+    private client: ClientProxy,
+    private orderService: OrderService,
+  ) {
     super();
   }
+
+  @Post('add-to-cart')
+  async postTest(@Res() res: Response, @Req() req: Request) {
+    const reqBody = {
+      quantity: req.body.quantity,
+      idProduct: req.body.idProduct,
+      userId: req.body.userId,
+    };
+    const data = await this.client.send(
+      {
+        cmd: 'post-test',
+      },
+      reqBody.idProduct,
+    );
+    const observableValue = await lastValueFrom(data.pipe(map((res) => res)));
+    if (observableValue.length == 0) {
+      return this.jsonResponse(res, HttpStatus.NOT_FOUND, 'Not found product');
+    }
+
+    //find user order
+    const userOrderIsExits: Orders[] = await this.orderService.findOrderById(
+      reqBody.userId,
+    );
+
+    if (userOrderIsExits.length == 0) {
+      console.log('order user is not exits');
+      this.orderService.createOrder({
+        userId: reqBody.userId,
+      });
+    }
+    const orderProduct: Partial<Order_Detail> = {
+      productId: observableValue[0].id,
+      price: observableValue[0].price,
+      quantity: reqBody.quantity,
+      order: userOrderIsExits[0].id,
+    };
+    await this.orderService.createOrderDetail(orderProduct);
+    return this.jsonResponse(res, HttpStatus.CREATED);
+  }
+
   @Get()
   async getAllOrderController(@Req() req: Request, @Res() res: Response) {
     const data: Orders[] = await this.orderService.getAllOrder();

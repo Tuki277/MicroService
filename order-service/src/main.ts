@@ -1,5 +1,6 @@
 import { NestApplication, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestApplication>(AppModule, {
@@ -10,6 +11,6 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
-  await app.listen(3000);
+  await app.listen(3002);
 }
 bootstrap();
