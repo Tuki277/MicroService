@@ -44,7 +44,7 @@ export class OrderController extends BaseResponse {
       return this.jsonResponse(res, HttpStatus.NOT_FOUND, 'Not found product');
     }
 
-    //find user order
+    // find user order
     const userOrderIsExits: Orders[] = await this.orderService.findOrderById(
       reqBody.userId,
     );
@@ -60,6 +60,7 @@ export class OrderController extends BaseResponse {
       price: observableValue[0].price,
       quantity: reqBody.quantity,
       order: userOrderIsExits[0].id,
+      totalMoney: observableValue[0].price * reqBody.quantity,
     };
     await this.orderService.createOrderDetail(orderProduct);
     return this.jsonResponse(res, HttpStatus.CREATED);
