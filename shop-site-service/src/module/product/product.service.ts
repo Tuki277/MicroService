@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { BaseResponse } from 'src/common/base/base.response';
 import { ProductRepository } from './product.repository';
+import { IPagging } from 'src/common/interface';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 
 @Injectable()
 export class ProductService extends BaseResponse {
@@ -8,17 +10,22 @@ export class ProductService extends BaseResponse {
     super();
   }
 
-  async getAllProduct() {
+  async countProduct(): Promise<number> {
+    return await this.productRepository.count();
+  }
+
+  async getAllProduct(req: IPagging) {
     try {
-      return await this.productRepository.get();
+      return await this.productRepository.get(req);
     } catch (error) {
       this.errorResponse(error.message);
     }
   }
 
-  async findProduct(id: number) {
+  async findProduct(req) {
+    console.log('pong ', req);
     try {
-      return await this.productRepository.find({ id });
+      return await this.productRepository.find(req);
     } catch (error) {
       this.errorResponse(error.message);
     }
