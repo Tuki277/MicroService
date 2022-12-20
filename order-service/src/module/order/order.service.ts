@@ -103,6 +103,18 @@ export class OrderService extends BaseResponse {
     }
   }
 
+  async findOrderDetail(id: number): Promise<Order_Detail[]> {
+    try {
+      const findOrder: Orders[] = await this.findOrderById(id);
+      if ((await findOrder).length == 0) {
+        this.errorResponse('Not found');
+      }
+      return await this.orderService.findOrderDetailByOrderId(findOrder[0].id);
+    } catch (error) {
+      this.errorResponse(error.message);
+    }
+  }
+
   async findOrderById(id: number): Promise<Orders[]> {
     try {
       return await this.orderService.findOrder({ userId: id });

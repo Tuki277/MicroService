@@ -37,7 +37,9 @@ export class OrderRepository {
   }
 
   async getOrderDetail(): Promise<Order_Detail[]> {
-    return await this.orderDetailEntity.find();
+    return await this.orderDetailEntity.find({
+      where: [],
+    });
   }
 
   async postOrderDetail(input: Partial<Order_Detail>) {
@@ -60,7 +62,15 @@ export class OrderRepository {
     input: Partial<Order_Detail>,
   ): Promise<Order_Detail[] | null> {
     return await this.orderDetailEntity.find({
+      relations: ['order'],
       where: [input],
+    });
+  }
+
+  async findOrderDetailByOrderId(id: number): Promise<Order_Detail[] | null> {
+    return await this.orderDetailEntity.find({
+      relations: ['order'],
+      where: { order: id },
     });
   }
 }

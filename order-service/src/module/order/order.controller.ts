@@ -91,16 +91,11 @@ export class OrderController extends BaseResponse {
     return this.jsonResponse(res, HttpStatus.NO_CONTENT);
   }
 
-  @Get('order-detail')
-  async getAllOrderDetailController(@Req() req: Request, @Res() res: Response) {
-    const data: Order_Detail[] = await this.orderService.getAllOrderDetail();
-    return this.jsonResponse(res, HttpStatus.OK, data);
-  }
-
   @Post('order-detail')
-  async addOrderDetailController(@Req() req: Request, @Res() res: Response) {
-    await this.orderService.createOrderDetail(req.body);
-    return this.jsonResponse(res, HttpStatus.CREATED);
+  async getAllOrderDetailController(@Req() req: Request, @Res() res: Response) {
+    const id = parseInt(req.body.userId);
+    const data: Order_Detail[] = await this.orderService.findOrderDetail(id);
+    return this.jsonResponse(res, HttpStatus.OK, data);
   }
 
   @Put('order-detail/:id')
