@@ -34,22 +34,16 @@ export class AuthController extends BaseResponse {
       req.body.password,
       req.body,
     );
+    console.log({ login });
+    await this.authService.createSession(login.id);
     const data = {
-      accessToken: login,
+      accessToken: {
+        accessToken: login.accessToken,
+        refreshToken: login.refreshToken,
+      },
       message: 'LoginSuccess',
       statusCode: 200,
     };
     return this.jsonResponse(res, HttpStatus.OK, data);
-  }
-
-  @Get()
-  async postTestQueue() {
-    console.log('ping');
-    return this.client.send(
-      {
-        cmd: 'find-code',
-      },
-      {},
-    );
   }
 }

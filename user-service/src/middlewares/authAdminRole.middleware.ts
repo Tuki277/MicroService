@@ -20,20 +20,25 @@ export class AuthRoleAdminMiddleware
 
   async use(req: Request, res: Response, next: NextFunction) {
     const id: number = (req as any).user;
-    const findUser: User[] = await this.userService.findUser(id);
-    if (!findUser) {
-      return this.jsonResponse(res, HttpStatus.UNAUTHORIZED);
-    } else {
-      const findRole: Role[] = await this.roleService.findRole(
-        findUser[0].role_id,
-      );
-      console.log(findRole);
-      if (findRole[0].name === 'admin') {
-        next();
-        return;
+    if (id !== undefined) {
+      const findUser: User[] = await this.userService.findUser(id);
+      console.log({ findUser });
+      if (!findUser) {
+        return this.jsonResponse(res, HttpStatus.UNAUTHORIZED);
       } else {
-        return this.jsonResponse(res, HttpStatus.FORBIDDEN);
+        const findRole: Role[] = await this.roleService.findRole(
+          findUser[0].role_id,
+        );
+        console.log(findRole);
+        if (findRole[0].name === 'admin') {
+          next();
+          return;
+        } else {
+          return this.jsonResponse(res, HttpStatus.FORBIDDEN);
+        }
       }
+    } else {
+      return this.errorResponse('Forbidden', HttpStatus.FORBIDDEN);
     }
   }
 }

@@ -5,14 +5,31 @@ import { comparePassword } from 'src/common/helper/comparePassword';
 import { Tokens } from '../user/tokens.entity';
 import { User } from '../user/user.entity';
 import { UserService } from '../user/user.service';
+import { SessionService } from '../session/session.service';
+import { Session } from '../session/session.entity';
 
 @Injectable()
 export class AuthService extends BaseResponse {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
+    private sessionService: SessionService,
   ) {
     super();
+  }
+
+  async createSession(id: number) {
+    console.log(id);
+    const findSession: Session[] = await this.sessionService.findSession(id);
+
+    if (findSession.length == 0) {
+      const data: Partial<Session> = {
+        user: id,
+        sessionId: 'sessionId' + id,
+      };
+      return await this.sessionService.createSession(data);
+    }
+    return;
   }
 
   async validatePassword(password: string, user: Partial<User>) {
@@ -56,6 +73,7 @@ export class AuthService extends BaseResponse {
       }
 
       return {
+        id: userIsExits[0].id,
         accessToken,
         refreshToken,
       };

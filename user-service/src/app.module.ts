@@ -16,6 +16,8 @@ import { RoleModule } from './module/role/role.module';
 import { Tokens } from './module/user/tokens.entity';
 import { User } from './module/user/user.entity';
 import { UserModule } from './module/user/user.module';
+import { SessionModule } from './module/session/session.module';
+import { Session } from './module/session/session.entity';
 
 @Module({
   imports: [
@@ -26,12 +28,13 @@ import { UserModule } from './module/user/user.module';
       username: env.USERNAME,
       password: env.PASSWORD,
       database: env.DATABASE,
-      entities: [User, Tokens, Role],
+      entities: [User, Tokens, Role, Session],
       synchronize: true,
     }),
     UserModule,
     AuthModule,
     RoleModule,
+    SessionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -47,7 +50,6 @@ export class AppModule implements NestModule {
         { path: '/api/auth/login', method: RequestMethod.POST },
         { path: '/api/auth/register', method: RequestMethod.POST },
       )
-      // .exclude({ path: '/api/auth/register', method: RequestMethod.POST })
       .forRoutes({ path: '*', method: RequestMethod.ALL });
   }
 }
